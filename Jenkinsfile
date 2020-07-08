@@ -1,9 +1,9 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
+    agent { docker { image 'ruby' } }
     stages {
         stage('build') {
             steps {
-                sh 'mvn --version'
+                sh 'ruby --version'
             }
         }
     }
