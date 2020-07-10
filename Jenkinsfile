@@ -37,7 +37,7 @@ podTemplate(label: 'builder',
                     usernameVariable: 'USERNAME',
                     passwordVariable: 'PASSWORD')]) {
                         /* namespace 존재여부 확인. 미존재시 namespace 생성 */
-                        sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
+                        sh "kubectl get ns"
 
                         /* yaml파일로 배포를 수행한다 */
                         sh "kubectl get all --all-namespaces"
