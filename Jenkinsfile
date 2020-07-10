@@ -33,7 +33,7 @@ podTemplate(label: 'builder',
         stage('Run kubectl') {
             container('kubectl') {
                 withCredentials([usernamePassword(
-                    credentialsId: 'kuber_credential',
+                    credentialsId: 'kube',
                     usernameVariable: 'USERNAME',
                     passwordVariable: 'PASSWORD')]) {
                         /* namespace 존재여부 확인. 미존재시 namespace 생성 */
