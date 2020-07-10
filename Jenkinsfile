@@ -32,11 +32,16 @@ podTemplate(label: 'builder',
 
         stage('Run kubectl') {
             container('kubectl') {
-                /* namespace 존재여부 확인. 미존재시 namespace 생성 */
-                //sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
-                sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
-                /* yaml파일로 배포를 수행한다 */
-                sh "kubectl get all --all-namespaces"
+                withCredentials([usernamePassword(
+                    credentialsId: 'kuber_credential',
+                    usernameVariable: 'USERNAME',
+                    passwordVariable: 'PASSWORD')]) {
+                        /* namespace 존재여부 확인. 미존재시 namespace 생성 */
+                        sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
+
+                        /* yaml파일로 배포를 수행한다 */
+                        sh "kubectl get all --all-namespaces"
+                }
             }
         }
     }
