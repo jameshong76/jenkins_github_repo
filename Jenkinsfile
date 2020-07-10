@@ -22,8 +22,8 @@ podTemplate(label: 'builder',
                 /*sh "helm install uangel-smsf /root/jenkins/auth/dish-smsf -n smsf"*/
                 /*sh "helm list -n smsf"
                 sh "helm repo add stable https://kubernetes-charts.storage.googleapis.com"*/
-                sh "helm repo add chartmuseum http://chartrepo.172.10.3.50.nip.io:31073"
-                sh "helm repo list"
+                //sh "helm repo add chartmuseum http://chartrepo.172.10.3.50.nip.io:31073"
+                //sh "helm repo list"
                 /*sh "helm search repo"*/
                 /*sh "helm install nginx-test stable/nginx-ingress"*/
                 /*sh "helm uninstall nginx-test -n ns-jenkins"*/
