@@ -1,7 +1,7 @@
 /* pipeline 변수 설정 */
 def DOCKER_IMAGE_NAME = "abasya/project-repo"           // 생성하는 Docker image 이름
 def DOCKER_IMAGE_TAGS = "batch-visualizer-auth"  // 생성하는 Docker image 태그
-//def NAMESPACE = "default"
+def NAMESPACE = "hong"
 //def NAMESPACE = "ns-project"
 def VERSION = "${env.BUILD_NUMBER}"
 def DATE = new Date();
@@ -33,8 +33,8 @@ podTemplate(label: 'builder',
         stage('Run kubectl') {
             container('kubectl') {
                 /* namespace 존재여부 확인. 미존재시 namespace 생성 */
+                //sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
                 sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
-
                 /* yaml파일로 배포를 수행한다 */
                 sh "kubectl get all --all-namespaces"
             }
