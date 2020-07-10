@@ -2,7 +2,7 @@
 def DOCKER_IMAGE_NAME = "abasya/project-repo"           // 생성하는 Docker image 이름
 def DOCKER_IMAGE_TAGS = "batch-visualizer-auth"  // 생성하는 Docker image 태그
 def NAMESPACE = "default"
-#def NAMESPACE = "ns-project"
+//def NAMESPACE = "ns-project"
 def VERSION = "${env.BUILD_NUMBER}"
 def DATE = new Date();
 
