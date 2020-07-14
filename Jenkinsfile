@@ -32,9 +32,8 @@ podTemplate(label: 'builder',
                 
         stage('Run kubectl') {
             container('kubectl') {
-                sh "kubectl get ns"
-                        /* yaml파일로 배포를 수행한다 */
-                sh "kubectl get all --all-namespaces"
+                withKubeConfig([credentialsId: '<credential-id>']) {
+                sh 'kubectl get pods'
             }
         }
     }
