@@ -32,8 +32,8 @@ podTemplate(label: 'builder',
 
         stage('Run kubectl') {
             container('kubectl') {
-                withKubeConfig([credentialsId: 'ca5e890b-bece-442b-b5bb-9e094379ea72']) {
-                sh 'kubectl get pods'
+                withKubeConfig([credentialsId: 'ca5e890b-bece-442b-b5bb-9e094379ea72', serverUrl: 'https://172.10.3.3:6443']){
+                  sh 'kubectl get pods'
                 }
             }
         }
