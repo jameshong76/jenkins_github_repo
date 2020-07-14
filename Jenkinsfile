@@ -31,10 +31,11 @@ podTemplate(label: 'builder',
         }
 
         stage('Run kubectl') {
-           container('kubectl') {
-                        /* namespace 존재여부 확인. 미존재시 namespace 생성 */
+            container('kubectl') {
+                withKubeConfig([credentialsId: 'bb34379c-7c4a-40ab-99c7-85e6f49dcced00', serverUrl: 'https://172.10.3.3:6443']){
                         sh "kubectl get pod"
-           }
+                }
+            }
         }
     }
 }
