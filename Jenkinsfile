@@ -29,7 +29,7 @@ podTemplate(label: 'builder',
                 /*sh "helm uninstall nginx-test -n ns-jenkins"*/
                 }
         }
-
+                
         stage('Run kubectl') {
             container('kubectl') {
                 sh "kubectl get ns"
