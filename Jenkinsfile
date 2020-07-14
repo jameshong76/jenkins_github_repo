@@ -32,7 +32,7 @@ podTemplate(label: 'builder',
 
         stage('Run kubectl') {
             container('kubectl') {
-                kubeconfig([kubeconfigId: 'kubeadmin']) 
+                kubeconfig([credentialsId: 'kubeadmin']) 
                 {
                    sh 'kubectl get pods'                 
                 }
