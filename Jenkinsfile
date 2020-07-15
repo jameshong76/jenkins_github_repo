@@ -1,16 +1,17 @@
-@Library('utils') _
+@Library('my-shared-library')
+import com.foo.utils.PodTemplates
 
-pipeline {
-    agent none
-    stages {
-        stage ('Example') {
-            steps {
-                // log.info 'Starting' 
-                script { 
-                    log.info 'Starting'
-                    log.warning 'Nothing to do!'
-                }
-            }
-        }
-    }
+slaveTemplates = new PodTemplates()
+
+slaveTemplates.dockerTemplate {
+  slaveTemplates.mavenTemplate {
+    node('builder') {
+      container('docker') {
+        sh 'echo hello from docker'
+      }
+      /*container('maven') {
+        sh 'echo hello from maven'
+      }*/
+     }
+  }
 }
