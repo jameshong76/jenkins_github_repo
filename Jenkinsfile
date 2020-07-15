@@ -1,5 +1,5 @@
 @Library('my-shared-library') _
-//import com.foo.utils.PodTemplates
+import com.foo.utils.PodTemplates
 
 slaveTemplates = new PodTemplates()
 
