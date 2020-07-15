@@ -5,7 +5,7 @@ slaveTemplates = new PodTemplates()
 
 slaveTemplates.dockerTemplate {
   slaveTemplates.mavenTemplate {
-    node(POD_LABEL) {
+    node('builder') {
       container('docker') {
         sh 'echo hello from docker'
       }
