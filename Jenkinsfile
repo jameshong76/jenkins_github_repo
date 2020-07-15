@@ -1,12 +1,16 @@
-@Library('my-shared-library')
-import com.foo.utils.PodTemplates
+@Library('utils') _
 
-slaveTemplates = new PodTemplates()
-
-slaveTemplates.dockerTemplate {
-    node(POD_LABEL) {
-      container('docker') {
-        sh 'echo hello from docker'
-      }
+pipeline {
+    agent none
+    stages {
+        stage ('Example') {
+            steps {
+                // log.info 'Starting' 
+                script { 
+                    log.info 'Starting'
+                    log.warning 'Nothing to do!'
+                }
+            }
+        }
     }
 }
