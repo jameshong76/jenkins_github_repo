@@ -1,21 +1,37 @@
-podTemplate(yaml: """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: some-label-value
-spec:
-  containers:
-  - name: busybox
-    image: busybox
-    command:
-    - cat
-    tty: true
-"""
-) {
+package com.foo.utils
+
+public void dockerTemplate(body) {
+  podTemplate(
+        containers: [containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)],
+        volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
+    body.call()
+}
+}
+
+public void mavenTemplate(body) {
+  podTemplate(
+        containers: [containerTemplate(name: 'maven', image: 'maven', command: 'cat', ttyEnabled: true)],
+        volumes: [secretVolume(secretName: 'maven-settings', mountPath: '/root/.m2'),
+                  persistentVolumeClaim(claimName: 'maven-local-repo', mountPath: '/root/.m2nrepo')]) {
+    body.call()
+}
+}
+
+return this
+
+import com.foo.utils.PodTemplates
+
+slaveTemplates = new PodTemplates()
+
+slaveTemplates.dockerTemplate {
+  slaveTemplates.mavenTemplate {
     node(POD_LABEL) {
-      container('busybox') {
-        sh "hostname"
+      container('docker') {
+        sh 'echo hello from docker'
       }
-    }
+      container('maven') {
+        sh 'echo hello from maven'
+      }
+     }
+  }
 }
