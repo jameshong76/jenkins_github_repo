@@ -19,9 +19,9 @@ public void mavenTemplate(body) {
 
 return this
 
-import com.foo.utils.PodTemplates
+import com.foo.utils.podTemplates
 
-slaveTemplates = new PodTemplates()
+slaveTemplates = new podTemplates()
 
 slaveTemplates.dockerTemplate {
   slaveTemplates.mavenTemplate {
