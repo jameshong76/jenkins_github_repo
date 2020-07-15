@@ -1,4 +1,5 @@
-import com.foo.utils.PodTemplates
+@Library('my-shared-library') _
+//import com.foo.utils.PodTemplates
 
 slaveTemplates = new PodTemplates()
 
