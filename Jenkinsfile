@@ -3,10 +3,10 @@ import com.foo.utils.PodTemplates
 
 slaveTemplates = new PodTemplates()
 
-slaveTemplates.mavenTemplate {
+slaveTemplates.dockerTemplate {
     node('builder') {
-      container('maven') {
-        sh 'echo hello from maven'
+      container('docker') {
+        sh 'echo hello from docker'
       }
     }
 }
