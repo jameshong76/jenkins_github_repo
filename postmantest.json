@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "76c2cdfe-5932-4ff2-96d8-ed3354906ca0",
+		"name": "hong collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sub test",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "https://openapi.naver.com/v1/search/movie.json?query=terminator&display=10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f3018c17-f753-4109-816c-1aa11c7ffd75",
+						"exec": [
+							"tests[\"response code is 200\"] = responseCode.code === 200;",
+							"var responseJSON; try {",
+							"responseJSON = JSON.parse(responseBody);",
+							"tests['response is valid JSON'] = true; }catch (e) {",
+							"responseJSON = {};",
+							"tests['response is valid JSON'] = false; }",
+							"//tests['response json contains notExistElement'] = _.has(responseJSON, 'notExistElement'); tests['response json contains total'] = _.has(responseJSON, 'total');",
+							"tests['response json contains start'] = _.has(responseJSON, 'start');",
+							"tests['response json contains display'] = _.has(responseJSON, 'display');",
+							"tests['response json contains items'] = _.has(responseJSON, 'items'); tests[\"total count is 16\"] = responseJSON.total === 16;",
+							"//tests['args key contains argument passed as url parameter'] = ('test' in responseJSON.args);",
+							"//tests['args passed via request url params has value \"123\"'] = (_.get(responseJSON, 'args.test') === //\"123\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Naver-Client-Id",
+						"value": "FCIvOj8oZxPv0fb4Aayy",
+						"type": "text"
+					},
+					{
+						"key": "X-Naver-Client-Secret",
+						"value": "u_d9PF1mLV",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://openapi.naver.com/v1/search/movie.json?query=terminator&display=10",
+					"protocol": "https",
+					"host": [
+						"openapi",
+						"naver",
+						"com"
+					],
+					"path": [
+						"v1",
+						"search",
+						"movie.json"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "terminator"
+						},
+						{
+							"key": "display",
+							"value": "10"
+						}
+					]
+				},
+				"description": "search by 'terminator', result 10 row"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
