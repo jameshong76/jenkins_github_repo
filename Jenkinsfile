@@ -9,7 +9,8 @@ def DATE = new Date();
 podTemplate(label: 'builder',
             containers: [
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true),
-                containerTemplate(name: "helm", image: "lachlanevenson/k8s-helm:latest", ttyEnabled: true, command: "cat")
+                containerTemplate(name: "helm", image: "lachlanevenson/k8s-helm:latest", ttyEnabled: true, command: "cat"),
+                containerTemplate(name: 'newman', image: 'postman/newman', ttyEnabled: true, command: 'cat')
             ]) {
     node('builder') {
         stage('Checkout') {
@@ -35,6 +36,15 @@ podTemplate(label: 'builder',
                 withKubeConfig([credentialsId: 'bb34379c-7c4a-40ab-99c7-85e6f49dcced', serverUrl: 'https://172.10.3.3:6443']){
                         sh "kubectl get pod"
                 }
+            }
+        }
+                
+        stage('Run RestAPI Test') {
+            container('newman') {
+                sh "echo RestAPI testing"
+                sh """
+                    newman run newmantest.json -n 2
+                """
             }
         }
     }
