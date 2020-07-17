@@ -33,7 +33,7 @@ podTemplate(label: 'builder',
         stage('Run kubectl') {
            container('kubectl') {
                         /* namespace 존재여부 확인. 미존재시 namespace 생성 */
-                        sh "kubectl get pod --all-namespaces"
+                        sh "kubectl get pod -n kube-system"
            }
         }
     }
