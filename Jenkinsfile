@@ -43,7 +43,7 @@ podTemplate(label: 'builder',
             container('newman') {
                 sh "echo RestAPI testing"
                 sh """
-                    newman run newmantest.json -n 2
+                    newman run postmantest.json -n 2
                 """
             }
         }
