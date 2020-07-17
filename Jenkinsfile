@@ -33,7 +33,7 @@ podTemplate(label: 'builder',
         stage('Run kubectl') {
             container('kubectl') {
                 withKubeConfig([credentialsId: '2e14a0a7-5431-4e40-b580-8c8a86ec99c6', serverUrl: 'https://172.10.3.3:6443']){
-                        sh "kubectl get pod -n kube-system"
+                        sh "kubectl get pod --all-namepsaces"
                 }
             }
         }
