@@ -16,6 +16,7 @@ podTemplate(label: 'builder',
         environment {
         def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
         def Var1= props['Monday']
+        echo "Var1=${Var1}"
         }
         stage('Checkout') {
              checkout scm   // gitlab으로부터 소스 다운
@@ -23,8 +24,7 @@ podTemplate(label: 'builder',
 
         stage( "Deploy to cluster" ) {
             container("helm") {
-                echo "Install with chart file !"
-                echo "Var1=${Var1}"
+                echo "Install with chart file !"             
                 /*sh "helm install uangel-smsf /root/jenkins/auth/dish-smsf -n smsf"*/
                 /*sh "helm list -n smsf"
                 /*sh "helm repo add stable https://kubernetes-charts.storage.googleapis.com"*/
