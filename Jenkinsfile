@@ -13,19 +13,15 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'newman', image: 'postman/newman', ttyEnabled: true, command: 'cat')
             ]) {
     node('builder') {
-        environment {
-        }
         stage('Checkout') {
              checkout scm   // gitlab으로부터 소스 다운
         }
 
         stage( "Deploy to cluster" ) {
             container("helm") {
-                def d = [test: 'Default', something: 'Default', other: 'Default']
-                def props = readProperties defaults: d, file: '/var/jenkins_home/jobs/pipe/builds/my.properties', text: 'other=Override'
-                //def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
-                //def Var1= props['Monday']
-                //echo "Var1=${Var1}"
+                def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
+                def Var1= props['Monday']
+                echo "Var1=${Var1}"
                 echo "Install with chart file !"             
                 /*sh "helm install uangel-smsf /root/jenkins/auth/dish-smsf -n smsf"*/
                 /*sh "helm list -n smsf"
