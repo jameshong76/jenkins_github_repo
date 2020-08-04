@@ -6,8 +6,11 @@ def NAMESPACE = "hong"
 def VERSION = "${env.BUILD_NUMBER}"
 def DATE = new Date();
 
+test.properties
+Monday=abcdef
+Tuesday=kfgh
 //generate a properties file after job is done
-def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/my.properties'
+def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
 
 podTemplate(label: 'builder',
             containers: [
