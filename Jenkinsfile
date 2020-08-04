@@ -6,9 +6,6 @@ def NAMESPACE = "hong"
 def VERSION = "${env.BUILD_NUMBER}"
 def DATE = new Date();
 
-//generate a properties file after job is done
-def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
-
 podTemplate(label: 'builder',
             containers: [
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true),
@@ -16,6 +13,9 @@ podTemplate(label: 'builder',
                 containerTemplate(name: 'newman', image: 'postman/newman', ttyEnabled: true, command: 'cat')
             ]) {
     node('builder') {
+        environment {
+        def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/test.properties'
+        }
         stage('Checkout') {
              checkout scm   // gitlab으로부터 소스 다운
         }
