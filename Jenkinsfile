@@ -6,6 +6,9 @@ def NAMESPACE = "hong"
 def VERSION = "${env.BUILD_NUMBER}"
 def DATE = new Date();
 
+//generate a properties file after job is done
+def props = readProperties  file:'/var/jenkins_home/jobs/pipe/builds/my.properties'
+
 podTemplate(label: 'builder',
             containers: [
                 containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.15.3', command: 'cat', ttyEnabled: true),
