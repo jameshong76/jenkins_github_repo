@@ -41,14 +41,6 @@ podTemplate(label: 'builder',
                 }
             }
         }
-                
-        stage('Run RestAPI Test') {
-            container('newman') {
-                sh "echo RestAPI testing"
-                sh """
-                    newman run postmantest.json -n 2
-                """
-            }
-        }
+               
     }
 }
